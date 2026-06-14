@@ -1,0 +1,21 @@
+# EditorConfig: ファイル種別ごとのインデント規約をエディタに伝える。
+# https://editorconfig.org/
+root = true
+
+# 既定: スペース2つ、末尾空白除去、改行で終わる。
+[*]
+indent_style = space
+indent_size = 2
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+# Makefile は必ずタブ(スペースだと missing separator エラーになる)。
+[Makefile]
+indent_style = tab
+
+# Nix ファイルは nixfmt 既定に合わせてスペース2つ。
+[*.nix]
+indent_style = space
+indent_size = 2
