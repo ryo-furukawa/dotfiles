@@ -17,9 +17,8 @@
   # ユーザーのホームディレクトリを nix-darwin に教える。
   users.users.${username}.home = "/Users/${username}";
 
-  # flakes と新 CLI を有効化(Determinate Nix では既定で有効だが明示しておく)。
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
+  # Determinate Nix を使っているため、Nix 本体の管理は Determinate に任せる。
+  # nix-darwin が Nix を管理しようとすると衝突するので無効化する。
+  # (flakes 等は Determinate 側で既に有効化済みなので nix.settings は不要)
+  nix.enable = false;
 }
