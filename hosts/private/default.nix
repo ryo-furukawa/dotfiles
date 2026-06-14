@@ -21,4 +21,10 @@
   # nix-darwin が Nix を管理しようとすると衝突するので無効化する。
   # (flakes 等は Determinate 側で既に有効化済みなので nix.settings は不要)
   nix.enable = false;
+
+  # nix-darwin に /etc/zshrc を管理させ、Nix プロファイル
+  # (/etc/profiles/per-user/$USER/bin 等)を PATH へ通す初期化を挿入する。
+  # これがないと git/delta/gh などの Nix 版が PATH に乗らず、
+  # システムや Homebrew の古いコマンドが優先されてしまう。
+  programs.zsh.enable = true;
 }

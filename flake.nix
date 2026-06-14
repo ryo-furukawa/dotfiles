@@ -39,6 +39,9 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
+            # HM が管理する dotfiles に既存の実体ファイルがあると衝突して停止する。
+            # 衝突したファイルを <name>.backup にリネームしてから上書きさせる。
+            home-manager.backupFileExtension = "backup";
             home-manager.extraSpecialArgs = { inherit inputs username; };
             home-manager.users.${username} = import ./home;
           }
