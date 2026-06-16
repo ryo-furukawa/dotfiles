@@ -11,16 +11,21 @@
   # fzf: ファジーファインダ。zsh 統合を有効にするとキーバインド(Ctrl-R 等)が入る
   programs.fzf = {
     enable = true;
-    # TODO: zsh との統合を有効にするオプションを 1 行追加する
+    enableZshIntegration = true;
   };
 
   # zoxide: 賢い cd。よく行くディレクトリを学習してジャンプできる
   programs.zoxide = {
     enable = true;
+    enableZshIntegration = true;
   };
 
-  # direnv: ディレクトリ毎に環境変数/シェルを自動ロード。nix と相性が良い
+  # direnv: ディレクトリ毎に環境変数/シェルを自動ロード。
+  # nix-direnv を有効にすると `use flake` のキャッシュ層が入り、cd の度の評価が高速になる。
+  # プロジェクトごとの言語環境はこの仕組みで閉じる(global は dev/languages.nix)。
   programs.direnv = {
     enable = true;
+    enableZshIntegration = true;
+    nix-direnv.enable = true;
   };
 }

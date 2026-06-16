@@ -1,0 +1,6 @@
+# Nix ビルド成果物(store パスへの symlink。マシン依存なので追跡しない)
+/result
+/result-*
+
+# 機密・マシン固有設定
+*.local.json
