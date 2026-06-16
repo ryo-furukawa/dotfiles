@@ -27,4 +27,26 @@
   # これがないと git/delta/gh などの Nix 版が PATH に乗らず、
   # システムや Homebrew の古いコマンドが優先されてしまう。
   programs.zsh.enable = true;
+
+  # GUI アプリ等は Homebrew cask 経由で「宣言だけ」Nix 管理する。
+  # 実体のインストールは brew が行う(nix-darwin は宣言と実体の同期役)。
+  # 既に手動 brew で入れたものは冪等にスキップされる。
+  homebrew = {
+    enable = true;
+
+    onActivation = {
+      # 宣言にない cask/formula を絶対に消さない。手動インストール済みの
+      # 既存アプリ(Raycast 等)を守るための最重要設定。
+      cleanup = "none";
+      # switch のたびに brew update / upgrade を走らせない(遅延・意図しない更新を防ぐ)。
+      autoUpdate = false;
+      upgrade = false;
+    };
+
+    casks = [
+      "ghostty"
+      "blackhole-2ch"
+      "claude-code"
+    ];
+  };
 }
