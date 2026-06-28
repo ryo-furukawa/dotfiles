@@ -18,6 +18,17 @@
     envExtra = ''
       [ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
     '';
+
+    # Homebrew の PATH/MANPATH 等を通す。cask で入れた GUI アプリの CLI
+    # (code/obsidian 等)や brew 本体を対話シェルから使えるようにする。
+    # Apple Silicon は /opt/homebrew、Intel は /usr/local に brew がある。
+    initContent = ''
+      if [ -x /opt/homebrew/bin/brew ]; then
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+      elif [ -x /usr/local/bin/brew ]; then
+        eval "$(/usr/local/bin/brew shellenv)"
+      fi
+    '';
   };
 
   # 旧 PATH 追加を移植。
