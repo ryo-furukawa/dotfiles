@@ -95,8 +95,23 @@ nix run nix-darwin -- switch --flake .#private
 | `make build` | 適用せずビルドだけ試す |
 | `make update` | flake の input を更新 |
 | `make fmt` | nix ファイルを整形 |
+| `make adopt` | 手動インストール済み .app を brew 管理下へ取り込む(初回移行用) |
 
 `PROFILE` はデフォルト `private`。会社 PC 等は `make switch PROFILE=work` で切り替える。
+
+### 手動インストール済みアプリの取り込み (make adopt)
+
+`casks` に宣言したアプリが既に `/Applications` に手動インストールされている場合、
+そのまま `make switch` すると brew が「既にアプリがある」で止まる。`make adopt` は
+`casks` 宣言を抽出して全 cask に `brew install --cask --adopt` を流し、既存 .app を
+**消さずに** brew 管理下へ取り込む。新しい cask を追加して初回 switch する前に一度実行する。
+
+```sh
+make adopt     # 既存 .app を brew 管理化(中身は変えない)
+make switch    # その後に適用
+```
+
+一度取り込めば brew 帳簿に載るので、以降の `make switch` は冪等にスキップされる。
 
 ## プロジェクトごとの言語環境 (direnv + nix-direnv)
 

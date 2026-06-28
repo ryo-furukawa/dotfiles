@@ -43,10 +43,31 @@
       upgrade = false;
     };
 
+    # 既存の手動インストール .app は、初回だけ `make adopt` を実行して brew
+    # 管理下へ取り込む(nix-darwin の宣言経由では --adopt を渡せないため)。
+    # adopt 済みなら以降の switch は冪等にスキップされる。詳細は Makefile 参照。
     casks = [
-      "ghostty"
+      "1password"
       "blackhole-2ch"
+      "chatgpt"
+      "claude"
       "claude-code"
+      "dbeaver-community"
+      "deepl"
+      "discord"
+      "docker-desktop"
+      "figma"
+      "ghostty"
+      "google-chrome"
+      "menubarx"
+      "notion"
+      "obsidian"
+      "postman"
+      "raycast"
+      "slack"
+      "tableplus"
+      "visual-studio-code"
+      "zoom"
     ];
   };
 }
