@@ -43,6 +43,13 @@
       upgrade = false;
     };
 
+    # CLI は原則 home-manager(Nix)で入れるが、nixpkgs に無いものだけ brew で
+    # 宣言する。deck は k1LoW 製の Markdown→Google Slides 生成ツールで、nixpkgs
+    # の同名 deck(Kong 用)とは別物のため Nix へ移行できず brew 管理を継続する。
+    brews = [
+      "deck"
+    ];
+
     # 既存の手動インストール .app は、初回だけ `make adopt` を実行して brew
     # 管理下へ取り込む(nix-darwin の宣言経由では --adopt を渡せないため)。
     # adopt 済みなら以降の switch は冪等にスキップされる。詳細は Makefile 参照。
@@ -69,5 +76,21 @@
       "visual-studio-code"
       "zoom"
     ];
+
+    # 以下は /Applications にあるが、意図的に cask 宣言へ入れていないもの
+    # (棚卸し済み。再検討の手間を省くため理由ごと記録する)。
+    #
+    # cask 化は可能だが手動運用のままにしているもの:
+    #   AltTab (alt-tab) / CheatSheet (cheatsheet) / Clipy (clipy) /
+    #   iTerm (iterm2) / Sourcetree (sourcetree) / Wireshark (wireshark-app)
+    #   → 必要になれば上の casks に足して make adopt すれば管理下に入る。
+    #
+    # cask 化できない/すべきでないもの(管理外が正常):
+    #   - Mac App Store 製: Amazon Kindle / LINE / Shazam / Mail+ / Magnet /
+    #     Xcode / Swift Playground(宣言するなら mas + homebrew.masApps が必要)
+    #   - Apple 純正・OS 同梱: Safari / Keynote / Numbers
+    #   - メーカー独自更新: Logi Options(plus)
+    #   - その他: 1Password 7(旧版。cask は v8)/ Raycast Beta(安定版は raycast)
+    #     / FileZilla(公式が cask 提供を停止)
   };
 }

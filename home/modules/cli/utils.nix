@@ -3,6 +3,11 @@
   # ── パッケージを入れるだけ系(設定不要のツール) ──
   # PATH に通すだけでよいツールはここに列挙する。
   home.packages = with pkgs; [
+    # brew から Nix へ寄せた CLI(GUI は brew/cask、CLI は Nix が原則)。
+    tmux # 端末多重化
+    coreutils # GNU 版 file/shell/text ユーティリティ
+    cloudflared # Cloudflare Tunnel クライアント
+
     # TODO: ripgrep, fd, bat, eza, jq, yq, httpie を列挙する
   ];
 
