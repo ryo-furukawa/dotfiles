@@ -1,5 +1,8 @@
 { username, ... }:
 {
+  # macOS システム設定(Dock/Finder/キーボード等)は別モジュールに分離。
+  imports = [ ./macos-defaults.nix ];
+
   # このマシンの CPU/OS。Apple Silicon なので aarch64-darwin。
   nixpkgs.hostPlatform = "aarch64-darwin";
 
